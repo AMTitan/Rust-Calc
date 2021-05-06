@@ -10,11 +10,10 @@ pub fn calc(input: &String) {
     re = Regex::new(r"[-]").unwrap();
     let add = re.replace_all(&add, "|-|");
     let mut split: Vec<&str> = add.split("|").collect();
-    //split.last().unwrap() = split.last().unwrap().take();
-    println!("num : {:?}",  split);
     for x in 0..split.len() {
         if (split[x] == "*") {
             split[x] = Box::leak((split[x-1].parse::<i32>().unwrap() * split[x+1].parse::<i32>().unwrap()).to_string().into_boxed_str());
+            
         }
     }
     println!("num : {:?}", split);
