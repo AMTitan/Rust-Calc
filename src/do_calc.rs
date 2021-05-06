@@ -11,7 +11,11 @@ pub fn calc(input: &String) {
     let power = re.replace_all(&add, "|^|");
     re = Regex::new(r"[-]").unwrap();
     let add = re.replace_all(&power, "|-|");
-    let mut split: Vec<&str> = power.split("|").collect();
+    re = Regex::new(r"[(]").unwrap();
+    let left = re.replace_all(&add, "|(|");
+    re = Regex::new(r"[)]").unwrap();
+    let right = re.replace_all(&left, "|)|");
+    let mut split: Vec<&str> = right.split("|").collect();
     let mut length = split.len();
     let mut x = 0;
     while x < length {
